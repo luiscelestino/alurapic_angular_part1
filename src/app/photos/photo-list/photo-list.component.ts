@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../photo/photo.service';
 import { Photo } from '../photo/photo';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ap-photo-list',
@@ -11,11 +12,14 @@ export class PhotoListComponent implements OnInit {
   photos: Photo[] = [];
   
   // injeção de dependência
-  constructor(private photoService: PhotoService) {}
+  constructor(private photoService: PhotoService,
+              private activatedRoute : ActivatedRoute
+  ) {}
   
   ngOnInit(): void {
+    const userName = this.activatedRoute.snapshot.params.userName;
     this.photoService
-      .listFromUser('flavio')
+      .listFromUser(userName)
       .subscribe(photos => this.photos = photos);
   }
 
