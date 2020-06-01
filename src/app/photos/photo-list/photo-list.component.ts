@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PhotoListComponent implements OnInit {
   photos: Photo[] = [];
+  filter: string = '';
   
   // injeção de dependência
   constructor(private photoService: PhotoService,
